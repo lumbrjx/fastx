@@ -21,4 +21,11 @@ npx fastzx c
 
 
 
+# TODO:
+- help page
+- edit readme
+- curl
+- package
+- refactor and file management
+- edit content
 
