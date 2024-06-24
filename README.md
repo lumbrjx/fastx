@@ -8,7 +8,7 @@ Fast-Z is a fastify route generator tool i made to skip the repeatitive process 
 use curl to download the binary file:
 
 ```
-curl -o myprogram.c https://raw.githubusercontent.com/lumbrjx/fast-z/main/fastx
+curl -o fastz https://raw.githubusercontent.com/lumbrjx/fast-z/main/fastx
 ```
 now you can check ``fastx -h show`` for user guide.
 
@@ -17,7 +17,7 @@ now you can check ``fastx -h show`` for user guide.
 first you have to initialize the tool in your fastify project root folder by running:
 
 ```
-fastzx -i attach
+fastz -i attach
 ```
 
 you will have to specify the domains parent folder path e.g. /src/domains. the tool will generate a fastx.toml file in the same dir. there you can edit the domainPath field if you want to change the domains parent folder destination.
@@ -48,7 +48,7 @@ export const ProductSchema = z.object({
 to generate a route simply run (in the root dir):
 
 ```
-fastzx -g <folder name>
+fastz -g <folder name>
 ```
 in addition you can ignore some schemas by adding 'ign':
 
