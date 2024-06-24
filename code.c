@@ -3,11 +3,11 @@
 
 void capitalizeFirstLetter(char *str) {
     if (str == NULL || strlen(str) == 0) {
-        return; // Handle null or empty strings
+        return; 
     }
     
     if (str[0] >= 'a' && str[0] <= 'z') {
-        str[0] = str[0] - ('a' - 'A'); // Convert to uppercase
+        str[0] = str[0] - ('a' - 'A'); 
     }
 }
 

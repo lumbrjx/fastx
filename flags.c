@@ -15,7 +15,7 @@ void flag_g(const char *f) {
   }
   sprintf(filename, "%s/model.def.ts", f);
   Configuration config;
-  FILE *file = fopen(filename, "r"); 
+  FILE *file = fopen(filename, "r");
   if (file == NULL) {
     perror("Error opening model.def.ts file ");
     return;
@@ -33,7 +33,7 @@ void flag_g(const char *f) {
       constPos += 6;
       char *nameStart = constPos;
       while (*nameStart == ' ')
-        nameStart++; 
+        nameStart++;
       char *nameEnd = strstr(nameStart, " ");
       if (nameEnd) {
         size_t nameLength = nameEnd - nameStart;
@@ -43,15 +43,14 @@ void flag_g(const char *f) {
       }
     } else if (strncmp(line, "//", 2) == 0) {
       strncpy(comments[commentCount], line, sizeof(line));
-      comments[commentCount][strlen(line) - 1] =
-          '\0';
+      comments[commentCount][strlen(line) - 1] = '\0';
       commentCount++;
     }
   }
 
-  fclose(file); 
+  fclose(file);
 
-  file = fopen(filename, "a"); 
+  file = fopen(filename, "a");
   if (file == NULL) {
     perror("Error opening file for appending");
     return;
@@ -67,13 +66,13 @@ void flag_g(const char *f) {
       char s[80];
       sprintf(s, "export interface %sData extends z.infer<typeof %s> { }",
               names[i], names[i]);
-      fprintf(file, "\n%s", s); 
+      fprintf(file, "\n%s", s);
       Command cmd;
 
       parseCommand(comments[i], &cmd);
 
-      char modified_code[8192]; 
-      strcpy(modified_code, code); 
+      char modified_code[8192];
+      strcpy(modified_code, code);
       char x[1042];
       char y[1042];
       char z[1042];
@@ -92,7 +91,7 @@ void flag_g(const char *f) {
       replaceSubstring(modified_code, "_REST_SCEA_TYPE_MAJ", cmd.body);
       replaceSubstring(modified_code, "_SERVICE", z);
       replaceSubstring(modified_code, "_PREFIX", cmd.resource);
-      FILE *fp; 
+      FILE *fp;
 
       char er[100];
       sprintf(er, "%s/%s.ts", f, cmd.action);
@@ -111,11 +110,11 @@ void flag_g(const char *f) {
   free(filename);
 }
 int flag_i(char *arg) {
-  if (strcmp(arg, "new") == 0) {
-		  //curl
-    printf("Curling for \"new\"\n");
-
-  } else if (strcmp(arg, "attach") == 0) {
+  // if (strcmp(arg, "new") == 0) {
+  //   //curl
+  //   printf("Curling for \"new\"\n");
+  //
+  if (strcmp(arg, "attach") == 0) {
     char input[MAX_INPUT_LENGTH];
     do {
       printf("Where's your routes folder? >> ");
@@ -130,7 +129,7 @@ int flag_i(char *arg) {
     } while (input[0] == '\0');
 
     Configuration config;
-    strcpy(config.routesDir, input); 
+    strcpy(config.routesDir, input);
     struct stat buffer;
     if (stat("fastx.toml", &buffer) == 0) {
       fprintf(stderr, "File '%s' already exists. Aborting write operation.\n",
@@ -138,10 +137,12 @@ int flag_i(char *arg) {
       return 1;
       exit(1);
     };
-    writeTomlFile("fastx.toml", &config); 
+    writeTomlFile("fastx.toml", &config);
     printf("fastx.toml configuration file has been created!\n");
   } else {
-    printf("Invalid argument \"%s\" for flag \"-i\". Run fastx -h show for more info\n", arg);
+    printf("Invalid argument \"%s\" for flag \"-i\". Run fastx -h show for "
+           "more info\n",
+           arg);
     return 1;
   }
   return 0;
@@ -158,15 +159,15 @@ int flag_h(char *arg) {
         "arg:\n"
 
         "  -i:\n"
-        "       new              Start a new fastx project from scratch with a "
-        "personal template.\n"
         "       attach           Integrate fastx into an existing project.\n"
         "  -g:\n"
         "       <folderName>     Routes folder where the model.def.ts lives.\n";
 
     printf("%s", help_string);
   } else {
-    printf("Invalid argument \"%s\" for flag \"-h\". Run fastx -h show for more info\n", arg);
+    printf("Invalid argument \"%s\" for flag \"-h\". Run fastx -h show for "
+           "more info\n",
+           arg);
     return 1;
   }
   return 0;

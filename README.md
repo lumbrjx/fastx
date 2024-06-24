@@ -1,31 +1,69 @@
 # fast-z
 
-Fast-Z is a fastify domain generator tool i made to skip the repeatitive process of creating a new folder with X name then making 4 sub files and copy code here and there. Thus, this tool handles that for me.
+Fast-Z is a fastify route generator tool i made to skip the repeatitive process of creating new route files and copy code here and there. Thus, this tool handles it for me.
 
-## how to use the tool
 
-first you have to initialize the tool in ur root dir by running:
+## how to setup the tool
 
-```
-npx fastzx i
-```
-
-you will have to specify the domains parent folder path e.g. /src/domains. the tool will generate a fastz.config.json file in the same dir. there u can edit the domainPath field if u want to change the domains parent folder destination.
-
-to generate a domain simply run (in the root dir):
+use curl to download the binary file:
 
 ```
-npx fastzx c
+curl -o myprogram.c https://raw.githubusercontent.com/lumbrjx/fast-z/main/fastx
+```
+now you can check ``fastx -h show`` for user guide.
+
+
+
+first you have to initialize the tool in your fastify project root folder by running:
+
+```
+fastzx -i attach
+```
+
+you will have to specify the domains parent folder path e.g. /src/domains. the tool will generate a fastx.toml file in the same dir. there you can edit the domainPath field if you want to change the domains parent folder destination.
+
+## how to generate routes
+
+You need to create a folder in the domains folder u specified earlier, then add a model.def.ts to it.
+the model.def.ts file will contain the routes zod schemas.
+each schema decalration should have a specific comment like this:
+
+```ts
+// --product,get,products,body,getProducts
+export const ProductSchema = z.object({
+  name: z.string().min(4).max(25),
+  price: z.number().min(1).max(9999999999),
+  is_available: z.boolean().default(true),
+  description: z.string().min(10).max(300),
+  category: z.string().min(4).max(25),
+});
+```
+### structure:
+- product: the route endpoint
+- get: the http method
+- products: route prefix
+- body: type of body (body, queryParams...)
+- getProducts: file name
+
+to generate a route simply run (in the root dir):
+
+```
+fastzx -g <folder name>
+```
+in addition you can ignore some schemas by adding 'ign':
+
+```ts
+// ign --product,get,products,body,getProducts
+export const ProductSchema = z.object({
+  name: z.string().min(4).max(25),
+  price: z.number().min(1).max(9999999999),
+  is_available: z.boolean().default(true),
+  description: z.string().min(10).max(300),
+  category: z.string().min(4).max(25),
+});
 ```
 
 
 
 
-# TODO:
-- help page
-- edit readme
-- curl
-- package
-- refactor and file management
-- edit content
 
