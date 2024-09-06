@@ -64,7 +64,7 @@ const char *code =
     "      },\n"
     "    },\n"
     "    async function _CONTROLLER(\n"
-    "      req: FastifyRequest<{ _REST_SCEA_TYPE_MAJ: _SCHEMA }>,\n"
+    "      req: FastifyRequest<{ _REST_SCEA_TYPE_MAJ: _DATA }>,\n"
     "      reply: FastifyReply,\n"
     "    ) {\n"
     "      try {\n"
