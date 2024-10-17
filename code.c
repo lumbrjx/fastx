@@ -39,7 +39,7 @@ void replaceSubstring(char *source, const char *target, const char *replacement)
 const char *code =
     "import { FastifyInstance, FastifyReply, FastifyRequest } from \"fastify\";\n"
     "import { _SCHEMA, _DATA } from \"./model.def\";\n"
-    "import { Result, parseToResult } from \"src/result.model\";\n"
+    "import { Result, parseToResult } from \"src/shared/result\";\n"
     "\n"
     "import { ZodTypeProvider } from \"fastify-type-provider-zod\";\n"
     "import { RouteResponse } from \"src/shared/models\";\n"
